@@ -6,25 +6,25 @@ router.use('/autores', autoresRoute);
 
 router.route('/suma').post((req, res) => {
     const {nums} = req.body;
-    res.send({respuesta:  nums.reduce((acc, val) => acc + Number(val), 0) });
+    res.json({respuesta:  nums.reduce((acc, val) => acc + Number(val), 0) });
 } )
 
 router.route('/resta').post((req, res) => {
     const {numToSubs, nums} = req.body;
 
-    res.send({respuesta:  nums.reduce((acc, val) => acc - Number(val), Number(numToSubs)) });
+    res.json({respuesta:  nums.reduce((acc, val) => acc - Number(val), Number(numToSubs)) });
 } )
 
 router.route('/multiplica').post((req, res) => {
     const {nums} = req.body;
 
-    res.send({respuesta:  nums.reduce((acc, val) => acc * Number(val), 1) });
+    res.json({respuesta:  nums.reduce((acc, val) => acc * Number(val), 1) });
 } )
 
 router.route('/divide').post((req, res) => {
     const {numToDiv, nums} = req.body;
 
-    res.send({respuesta:  nums.reduce((acc, val) => acc / Number(val), Number(numToDiv)) });
+    res.json({respuesta:  nums.reduce((acc, val) => acc / Number(val), Number(numToDiv)) });
 } )
 
 router.route('/free').post((req, res) => {
@@ -32,14 +32,27 @@ router.route('/free').post((req, res) => {
 
     try {
         let resultado = eval(operation);
-        res.send({respuesta: resultado});
+        res.json({respuesta: resultado});
 
     } catch (error) {
-        res.send({respuesta: "Al chile no se pudo wey"});
+        res.json({respuesta: "Al chile no se pudo wey"});
 
     }
 } )
 
+
+router.use('/', (req, res)=>{
+    res.json({
+        paths: [
+            "/autores",
+            "/suma",
+            "/resta",
+            "/multiplica",
+            "/divide",
+            "/divide"
+        ]
+    })
+})
 
 
 module.exports = router;
