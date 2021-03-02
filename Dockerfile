@@ -1,14 +1,12 @@
-
-ARG PORT=3030
-
 FROM node:12-alpine
 
-ENV PORT=3030
+ARG PORT_NUM=3000
+ENV PORT=3000
 
 LABEL autor1="Mauricio"
 LABEL autor2="Edgar"
 
-WORKDIR /usr/src/app
+WORKDIR /usr/src/
 
 COPY package*.json ./
 
@@ -16,6 +14,6 @@ RUN npm install
 
 COPY . .
 
-EXPOSE ${PORT}
+EXPOSE ${PORT_NUM}
 
-CMD [ "node", "server.js" ]
+CMD [ "npm", "start" ]
